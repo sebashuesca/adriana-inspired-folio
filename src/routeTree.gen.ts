@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as HabilidadesRouteImport } from './routes/habilidades'
 import { Route as ProyectosRouteImport } from './routes/proyectos'
 import { Route as SobreMiRouteImport } from './routes/sobre-mi'
@@ -17,6 +18,11 @@ import { Route as SobreMiRouteImport } from './routes/sobre-mi'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HabilidadesRoute = HabilidadesRouteImport.update({
@@ -37,12 +43,14 @@ const SobreMiRoute = SobreMiRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
   '/habilidades': typeof HabilidadesRoute
   '/proyectos': typeof ProyectosRoute
   '/sobre-mi': typeof SobreMiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
   '/habilidades': typeof HabilidadesRoute
   '/proyectos': typeof ProyectosRoute
   '/sobre-mi': typeof SobreMiRoute
@@ -50,20 +58,23 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contacto': typeof ContactoRoute
   '/habilidades': typeof HabilidadesRoute
   '/proyectos': typeof ProyectosRoute
   '/sobre-mi': typeof SobreMiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/habilidades' | '/proyectos' | '/sobre-mi'
+  fullPaths: '/' | '/contacto' | '/habilidades' | '/proyectos' | '/sobre-mi'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/habilidades' | '/proyectos' | '/sobre-mi'
-  id: '__root__' | '/' | '/habilidades' | '/proyectos' | '/sobre-mi'
+  to: '/' | '/contacto' | '/habilidades' | '/proyectos' | '/sobre-mi'
+  id:
+    '__root__' | '/' | '/contacto' | '/habilidades' | '/proyectos' | '/sobre-mi'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactoRoute: typeof ContactoRoute
   HabilidadesRoute: typeof HabilidadesRoute
   ProyectosRoute: typeof ProyectosRoute
   SobreMiRoute: typeof SobreMiRoute
@@ -76,6 +87,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/habilidades': {
@@ -104,6 +122,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactoRoute: ContactoRoute,
   HabilidadesRoute: HabilidadesRoute,
   ProyectosRoute: ProyectosRoute,
   SobreMiRoute: SobreMiRoute,

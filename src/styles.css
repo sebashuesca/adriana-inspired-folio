@@ -155,3 +155,45 @@
     color: var(--color-foreground);
   }
 }
+
+@layer base {
+  body {
+    font-family: var(--font-display);
+  }
+}
+
+@utility hero-surface {
+  background-image: var(--gradient-hero);
+  box-shadow: var(--shadow-card);
+}
+
+@utility nav-pill {
+  display: block;
+  width: 100%;
+  border: 1px solid oklch(1 0 0 / 0.55);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: oklch(1 0 0);
+  background-color: oklch(1 0 0 / 0.06);
+  transition:
+    background-color 0.25s ease,
+    transform 0.25s ease;
+
+  &:hover {
+    background-color: oklch(1 0 0 / 0.18);
+    transform: translateY(-2px);
+  }
+}
+
+@utility section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+}
